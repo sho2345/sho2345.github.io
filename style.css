@@ -1,0 +1,172 @@
+/* ========== 基本設定 ========== */
+html {
+    scroll-behavior: smooth; /* ページ内リンクをスムーズにスクロールさせる */
+}
+
+body {
+    font-family: 'Helvetica Neue', 'Arial', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Meiryo', sans-serif;
+    margin: 0;
+    background-color: #f8f9fa; /* 背景を少しグレーに */
+    color: #333; /* 基本の文字色 */
+    line-height: 1.7;
+}
+
+/* ========== ヘッダー ========== */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+}
+
+header .logo {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+header nav li {
+    margin-left: 30px;
+}
+
+header nav a {
+    text-decoration: none;
+    color: #555;
+    font-weight: bold;
+}
+
+/* ========== 全体のレイアウト ========== */
+.content-wrapper {
+    max-width: 1000px;
+    margin: 80px auto; /* 上下の余白を80px、左右は自動で中央寄せ */
+    padding: 0 40px;
+}
+
+h2 {
+    font-size: 32px;
+    text-align: left;
+    margin-bottom: 40px;
+}
+
+/* ========== 自己紹介セクション ========== */
+.about-container {
+    display: flex;
+    align-items: center;
+    gap: 50px; /* 画像とテキストの間隔 */
+}
+
+.about-image img {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%; /* 画像を丸くする */
+    object-fit: cover; /* 画像の比率を保ったままトリミング */
+}
+
+.about-text h2 {
+    font-size: 48px;
+    margin-top: 0;
+}
+
+.buttons {
+    margin-top: 30px;
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 15px 30px;
+    border-radius: 50px; /* ボタンを角丸にする */
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+    min-width: 120px;
+}
+
+.btn-yellow { background-color: #ffc107; }
+.btn-red { background-color: #dc3545; }
+.btn-blue { background-color: #00bcd4; }
+
+
+/* ========== 経歴セクション ========== */
+.experience-item {
+    display: flex;
+    gap: 30px;
+    border-bottom: 1px solid #eee;
+    padding: 20px 0;
+}
+.experience-item:last-child {
+    border-bottom: none;
+}
+.experience-item .year {
+    color: #888;
+    min-width: 120px;
+}
+.experience-item h3 {
+    margin: 0 0 5px 0;
+}
+.experience-item p {
+    margin: 0;
+}
+
+/* ========== プロジェクトセクション ========== */
+.project-item {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 60px;
+}
+
+/* 2つ目以降のプロジェクトはテキストと画像を逆にする */
+.project-item:nth-child(odd) {
+    flex-direction: row-reverse;
+}
+
+.project-text {
+    flex: 1; /* 比率を1にする */
+}
+
+.project-image {
+    flex: 1;
+}
+
+.project-item h3 {
+    font-size: 24px;
+}
+
+.project-item img {
+    width: 100%;
+    display: block;
+}
+
+/* ========== スマホ対応 ========== */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .content-wrapper {
+        margin: 40px auto;
+        padding: 0 20px;
+    }
+    .about-container, .project-item, .project-item:nth-child(odd) {
+        flex-direction: column;
+    }
+    .about-text h2 {
+        font-size: 36px;
+        text-align: center;
+    }
+    .buttons {
+        justify-content: center;
+    }
+}
