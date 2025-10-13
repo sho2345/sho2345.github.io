@@ -1,13 +1,13 @@
-﻿/* ========== 蝓ｺ譛ｬ險ｭ螳・========== */
+﻿/* ========== 基本設定 ========== */
 html {
-    scroll-behavior: smooth; /* 繝壹・繧ｸ蜀・Μ繝ｳ繧ｯ繧偵せ繝繝ｼ繧ｺ縺ｫ繧ｹ繧ｯ繝ｭ繝ｼ繝ｫ縺輔○繧・*/
+    scroll-behavior: smooth; /* ページ内リンクをスムーズにスクロール */
 }
 
 body {
     font-family: 'Helvetica Neue', 'Arial', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Meiryo', sans-serif;
     margin: 0;
     background-color: #f8f9fa; /* 閭梧勹繧貞ｰ代＠繧ｰ繝ｬ繝ｼ縺ｫ */
-    color: #333; /* 蝓ｺ譛ｬ縺ｮ譁・ｭ苓牡 */
+    color: #333; /* 基本文字色 */
     line-height: 1.7;
 }
 
@@ -43,10 +43,10 @@ header nav a {
     font-weight: bold;
 }
 
-/* ========== 蜈ｨ菴薙・繝ｬ繧､繧｢繧ｦ繝・========== */
+/* ========== 全体レイアウト ========== */
 .content-wrapper {
     max-width: 1000px;
-    margin: 80px auto; /* 荳贋ｸ九・菴咏區繧・0px縲∝ｷｦ蜿ｳ縺ｯ閾ｪ蜍輔〒荳ｭ螟ｮ蟇・○ */
+    margin: 80px auto; /* 上下余白80px、左右は自動で中央寄せ */
     padding: 0 40px;
 }
 
@@ -60,14 +60,14 @@ h2 {
 .about-container {
     display: flex;
     align-items: center;
-    gap: 50px; /* 逕ｻ蜒上→繝・く繧ｹ繝医・髢馴囈 */
+    gap: 50px; /* 画像とテキストの間隔 */
 }
 
 .about-image img {
     width: 280px;
     height: 280px;
-    border-radius: 50%; /* 逕ｻ蜒上ｒ荳ｸ縺上☆繧・*/
-    object-fit: cover; /* 逕ｻ蜒上・豈皮紫繧剃ｿ昴▲縺溘∪縺ｾ繝医Μ繝溘Φ繧ｰ */
+    border-radius: 50%; /* 画像を丸くする */
+    object-fit: cover; /* 画像の比率を保ったままトリミング */
 }
 
 .about-text h2 {
@@ -127,13 +127,13 @@ h2 {
     margin-bottom: 60px;
 }
 
-/* 2縺､逶ｮ莉･髯阪・繝励Ο繧ｸ繧ｧ繧ｯ繝医・繝・く繧ｹ繝医→逕ｻ蜒上ｒ騾・↓縺吶ｋ */
+/* 2つ目以降のプロジェクトでテキストと画像を交互にする */
 .project-item:nth-child(odd) {
     flex-direction: row-reverse;
 }
 
 .project-text {
-    flex: 1; /* 豈皮紫繧・縺ｫ縺吶ｋ */
+    flex: 1; /* 幅を均等にする */
 }
 
 .project-image {
@@ -149,7 +149,7 @@ h2 {
     display: block;
 }
 
-/* ========== 繧ｹ繝槭・蟇ｾ蠢・========== */
+/* ========== スマホ対応 ========== */
 @media (max-width: 768px) {
     header {
         flex-direction: column;
@@ -178,6 +178,9 @@ h2 {
 .btn-x { background-color: #000000; }
 #contact .btn { margin-right: 10px; }
 
-/* Make publication project titles smaller (half size) */
+/* Publications内のタイトルを半分のサイズに */
 #publication .project-text h3 { font-size: 12px; line-height: 1.4; }
+
+
+#publication .project-item img { max-width: 360px; height: auto; }
 
