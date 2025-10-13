@@ -173,3 +173,11 @@ h2 {
 #publication h2 { font-size: 26px; }
 #publication .pub-subtitle { font-size: 20px; margin: 20px 0 10px; color: #555; }
 
+
+.btn-linkedin { background-color: #0a66c2; }
+.btn-x { background-color: #000000; }
+#contact .btn { margin-right: 10px; }
+
+/* Make publication project titles smaller (half size) */
+#publication .project-text h3 { font-size: 12px; line-height: 1.4; }
+
