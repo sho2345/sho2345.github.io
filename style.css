@@ -179,8 +179,13 @@ h2 {
 #contact .btn { margin-right: 10px; }
 
 /* Publications内のタイトルを半分のサイズに */
-#publication .project-text h3 { font-size: 12px; line-height: 1.4; }
+#publication .project-text h3 { font-size: 16px; line-height: 1.4; font-weight: normal; }
 
 
 #publication .project-item img { max-width: 360px; height: auto; }
+
+/* Publications layout tweaks: tighter image-text spacing */
+#publication .project-item { gap: 12px; margin-bottom: 30px; }
+#publication .project-image { flex: 0 0 auto; }
+#publication .project-text { flex: 1; }
 
