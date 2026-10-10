@@ -272,10 +272,10 @@ button {
    ========================================================== */
 .hero {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 200px;
-    align-items: end;
-    gap: 64px;
-    padding: 112px 0 96px;
+    grid-template-columns: minmax(0, 1fr) 148px;
+    align-items: stretch; /* 写真の高さを文章ブロックに揃える */
+    gap: 56px;
+    padding: 64px 0 80px;
     scroll-margin-top: var(--header-h);
 }
 
@@ -306,20 +306,20 @@ html[lang="ja"] .hero-bio {
 }
 
 .hero-photo {
-    aspect-ratio: 4 / 5;
+    position: relative;
     overflow: hidden;
     border-radius: 3px;
     background: var(--line);
 }
 
+/* 写真は枠いっぱいに敷く（枠の高さは文章ブロックの高さで決まる） */
 .hero-photo img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: 65% 55%;
-    /* 人物が小さい写真なので少し寄りでトリミングする */
-    transform: scale(1.35);
-    transform-origin: 64% 60%;
+    object-position: 50% 30%;
 }
 
 /* ==========================================================
@@ -710,12 +710,14 @@ html[lang="ja"] .pub-group {
     .hero {
         grid-template-columns: 1fr;
         gap: 32px;
-        padding: 48px 0 56px;
+        padding: 40px 0 56px;
     }
 
+    /* スマホでは文章の上に縦長で置く */
     .hero-photo {
         order: -1;
         width: 116px;
+        aspect-ratio: 4 / 5;
     }
 
     .hero-name {
