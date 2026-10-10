@@ -580,6 +580,13 @@ html[lang="ja"] .pub-group {
     color: var(--muted);
 }
 
+/* 和文タイトルを英訳した旨の注記 */
+.pub-note {
+    margin-top: 6px;
+    font-size: 12.5px;
+    color: var(--muted);
+}
+
 .pub-links {
     display: flex;
     gap: 8px;
