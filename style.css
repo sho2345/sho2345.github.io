@@ -13,7 +13,6 @@
     --thumb-bg: #ffffff;
 
     --font-sans: "Inter", "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Meiryo", system-ui, sans-serif;
-    --font-display: "Instrument Serif", "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
 
     --container: 920px;
     --gutter: 32px;
@@ -280,45 +279,18 @@ button {
     scroll-margin-top: var(--header-h);
 }
 
-.hero-kicker {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-}
-
-/* キッカー前の短いアクセント線 */
-.hero-kicker::before {
-    content: "";
-    width: 24px;
-    height: 1px;
-    background: var(--accent);
-    flex: none;
-}
-
-html[lang="ja"] .hero-kicker {
-    letter-spacing: 0.08em;
-}
-
 .hero-name {
-    font-family: var(--font-display);
-    font-weight: 400;
-    font-size: clamp(52px, 8vw, 84px);
-    line-height: 1;
-    letter-spacing: -0.015em;
-    margin-bottom: 32px;
+    font-weight: 500;
+    font-size: clamp(40px, 6vw, 60px);
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    margin-bottom: 28px;
 }
 
 html[lang="ja"] .hero-name {
-    font-weight: 500;
-    font-size: clamp(44px, 6.6vw, 68px);
-    letter-spacing: 0.04em;
-    line-height: 1.15;
+    font-size: clamp(36px, 5.2vw, 52px);
+    letter-spacing: 0.02em;
+    line-height: 1.2;
 }
 
 .hero-bio {
@@ -385,7 +357,7 @@ html[lang="ja"] .hero-bio {
 
 .fold-btn {
     display: grid;
-    grid-template-columns: 56px minmax(0, 1fr) 20px;
+    grid-template-columns: 56px minmax(0, 1fr);
     align-items: baseline;
     width: 100%;
     padding: 26px 0 24px;
@@ -405,55 +377,21 @@ html[lang="ja"] .hero-bio {
 }
 
 .fold-title {
-    font-family: var(--font-display);
-    font-weight: 400;
-    font-size: 34px;
-    line-height: 1.15;
-    letter-spacing: -0.005em;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
     transition: transform 0.35s var(--ease);
 }
 
 html[lang="ja"] .fold-title {
-    font-size: 26px;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-}
-
-/* プラス / マイナスアイコン（2 本の線で描画） */
-.fold-icon {
-    position: relative;
-    width: 14px;
-    height: 14px;
-    align-self: center;
-    justify-self: end;
-    color: var(--muted);
-    transition: color 0.25s ease;
-}
-
-.fold-icon::before,
-.fold-icon::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 50%;
-    width: 100%;
-    height: 1px;
-    background: currentColor;
-    transition: transform var(--dur) var(--ease);
-}
-
-.fold-icon::after {
-    transform: rotate(90deg);
-}
-
-.fold.is-open .fold-icon::after {
-    transform: rotate(0deg);
+    font-size: 21px;
+    letter-spacing: 0.04em;
 }
 
 /* ホバー（マウス環境）・フォーカス時の見た目 */
 @media (hover: hover) {
-    .fold-btn:hover .fold-num,
-    .fold-btn:hover .fold-icon {
+    .fold-btn:hover .fold-num {
         color: var(--accent);
     }
     .fold-btn:hover .fold-title {
@@ -516,10 +454,6 @@ html[lang="ja"] .fold-title {
 .js .fold.is-instant .fold-panel,
 .js .fold.is-instant .fold-inner {
     transition: none !important;
-}
-
-html:not(.js) .fold-icon {
-    display: none;
 }
 
 html:not(.js) .fold-btn {
@@ -784,16 +718,6 @@ html[lang="ja"] .pub-group {
         width: 116px;
     }
 
-    .hero-kicker {
-        gap: 10px;
-        font-size: 10.5px;
-        letter-spacing: 0.07em;
-    }
-
-    .hero-kicker::before {
-        width: 16px;
-    }
-
     .hero-name {
         margin-bottom: 24px;
     }
@@ -803,16 +727,16 @@ html[lang="ja"] .pub-group {
     }
 
     .fold-btn {
-        grid-template-columns: 36px minmax(0, 1fr) 16px;
+        grid-template-columns: 36px minmax(0, 1fr);
         padding: 22px 0 20px;
     }
 
     .fold-title {
-        font-size: 28px;
+        font-size: 21px;
     }
 
     html[lang="ja"] .fold-title {
-        font-size: 22px;
+        font-size: 19px;
     }
 
     .fold-inner {

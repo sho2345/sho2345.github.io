@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shogo Iwakata</title>
     <meta name="color-scheme" content="light dark">
-    <!-- Web フォント（欧文: Inter / Instrument Serif、和文: Noto Sans JP） -->
+    <!-- Web フォント（欧文: Inter、和文: Noto Sans JP） -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@500&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600&display=swap">
     <link rel="stylesheet" href="style.css">
     <!-- 言語設定を描画前に反映するため head で読み込む -->
     <script src="script.js"></script>
@@ -39,15 +39,12 @@
         <!-- ========== ヒーロー（プロフィール） ========== -->
         <section id="profile" class="hero">
             <div class="hero-text">
-                <p class="hero-kicker">
-                    <span data-lang="en">Machine Learning · Computer Vision · Robotics</span><span data-lang="ja">機械学習 · コンピュータビジョン · ロボティクス</span>
-                </p>
                 <h1 class="hero-name"><span data-lang="en">Shogo Iwakata</span><span data-lang="ja">岩片 彰吾</span></h1>
                 <p class="hero-bio" data-lang="en">
-                    I am a second-year Master’s student at Waseda University, belonging to the <a href="https://morishima-lab.jp/members" target="_blank" rel="noopener noreferrer">Morishima Lab</a>. My research interests include machine learning, computer vision, and robotics. Currently, I am working on imitation learning for robots using a small amount of data.
+                    I am a Research and Development Scientist at Hitachi, Ltd. My research interests include machine learning, computer vision, and robotics.
                 </p>
                 <p class="hero-bio" data-lang="ja">
-                    早稲田大学 大学院 修士2年で、<a href="https://morishima-lab.jp/members" target="_blank" rel="noopener noreferrer">森島研究室</a>に所属しています。機械学習、コンピュータビジョン、ロボティクスに関心があり、現在は少量のデータを用いたロボットの模倣学習に取り組んでいます。
+                    株式会社日立製作所で研究開発職として働いています。機械学習、コンピュータビジョン、ロボティクスに関心があります。
                 </p>
             </div>
             <figure class="hero-photo">
@@ -64,7 +61,6 @@
                     <button type="button" class="fold-btn" id="experience-btn" aria-expanded="true" aria-controls="experience-panel">
                         <span class="fold-num" aria-hidden="true">01</span>
                         <span class="fold-title"><span data-lang="en">Experience</span><span data-lang="ja">職歴</span></span>
-                        <span class="fold-icon" aria-hidden="true"></span>
                     </button>
                 </h2>
                 <div class="fold-panel" id="experience-panel" role="region" aria-labelledby="experience-btn">
@@ -94,14 +90,13 @@
                     <button type="button" class="fold-btn" id="education-btn" aria-expanded="true" aria-controls="education-panel">
                         <span class="fold-num" aria-hidden="true">02</span>
                         <span class="fold-title"><span data-lang="en">Education</span><span data-lang="ja">学歴</span></span>
-                        <span class="fold-icon" aria-hidden="true"></span>
                     </button>
                 </h2>
                 <div class="fold-panel" id="education-panel" role="region" aria-labelledby="education-btn">
                     <div class="fold-inner">
                         <ol class="timeline">
                             <li class="entry">
-                                <p class="entry-date">2024 - </p>
+                                <p class="entry-date">2024 - 2026</p>
                                 <div class="entry-body">
                                     <h3 class="entry-title"><span data-lang="en">Waseda University</span><span data-lang="ja">早稲田大学</span></h3>
                                     <p class="entry-sub"><span data-lang="en">Master's Program, Graduate School of Advanced Science and Engineering, Morishima Lab</span><span data-lang="ja">大学院 先進理工学研究科 修士課程（森島研究室）</span></p>
@@ -111,7 +106,7 @@
                                 <p class="entry-date">2020 - 2024</p>
                                 <div class="entry-body">
                                     <h3 class="entry-title"><span data-lang="en">Waseda University</span><span data-lang="ja">早稲田大学</span></h3>
-                                    <p class="entry-sub"><span data-lang="en">Bachelor's Program, Graduate School of Advanced Science and Engineering, Morishima Lab</span><span data-lang="ja">先進理工学部 学士課程（森島研究室）</span></p>
+                                    <p class="entry-sub"><span data-lang="en">Bachelor's Program, School of Advanced Science and Engineering, Morishima Lab</span><span data-lang="ja">先進理工学部 学士課程（森島研究室）</span></p>
                                 </div>
                             </li>
                             <li class="entry">
@@ -130,19 +125,12 @@
                     <button type="button" class="fold-btn" id="publication-btn" aria-expanded="true" aria-controls="publication-panel">
                         <span class="fold-num" aria-hidden="true">03</span>
                         <span class="fold-title"><span data-lang="en">Publications</span><span data-lang="ja">研究業績</span></span>
-                        <span class="fold-icon" aria-hidden="true"></span>
                     </button>
                 </h2>
                 <div class="fold-panel" id="publication-panel" role="region" aria-labelledby="publication-btn">
                     <div class="fold-inner">
                         <h3 class="pub-group"><span data-lang="en">International</span><span data-lang="ja">国際会議</span></h3>
                         <ol class="pubs">
-                            <li class="pub">
-                                <div class="pub-text">
-                                    <p class="pub-cite"><span class="pub-title">Improving Imitation Learning Efficiency for Manipulation through Geometric Prior Pretraining<span class="sep">,</span></span> <span class="pub-authors"><span class="me">Shogo Iwakata</span>, Tomohiro Motoda, Ryosuke Yamada, Koshi Makihara, Ryoichi Nakajo, Keitaro Tanaka, Masaki Murooka, Roman Mykhailyshyn, Hirokatsu Kataoka, Shigeo Morishima, Yukiyasu Domae<span class="sep">,</span></span> <span class="pub-venue">arXiv preprint arXiv:2609.12721, September 2026.</span></p>
-                                    <p class="pub-links"><a class="tag" href="https://arxiv.org/abs/2609.12721" target="_blank" rel="noopener noreferrer"><span class="bracket">[</span>arXiv<span class="bracket">]</span></a></p>
-                                </div>
-                            </li>
                             <li class="pub has-thumb">
                                 <div class="pub-text">
                                     <p class="pub-cite"><span class="pub-title">Viewpoint-Dependent 3D Visual Grounding for Mobile Robots<span class="sep">,</span></span> <span class="pub-authors"><span class="me">Shogo Iwakata</span>, Ryosuke Oshima, Hideki Tsunashima, Qi Feng, Hirokatsu Kataoka, Shigeo Morishima<span class="sep">,</span></span> <span class="pub-venue">IEEE International Conference on Image Processing (ICIP2025), September 2025.</span></p>
@@ -180,6 +168,16 @@
                             -->
                         </ol>
 
+                        <h3 class="pub-group"><span data-lang="en">Preprint</span><span data-lang="ja">プレプリント</span></h3>
+                        <ol class="pubs">
+                            <li class="pub">
+                                <div class="pub-text">
+                                    <p class="pub-cite"><span class="pub-title">Improving Imitation Learning Efficiency for Manipulation through Geometric Prior Pretraining<span class="sep">,</span></span> <span class="pub-authors"><span class="me">Shogo Iwakata</span>, Tomohiro Motoda, Ryosuke Yamada, Koshi Makihara, Ryoichi Nakajo, Keitaro Tanaka, Masaki Murooka, Roman Mykhailyshyn, Hirokatsu Kataoka, Shigeo Morishima, Yukiyasu Domae<span class="sep">,</span></span> <span class="pub-venue">arXiv preprint arXiv:2609.12721, September 2026.</span></p>
+                                    <p class="pub-links"><a class="tag" href="https://arxiv.org/abs/2609.12721" target="_blank" rel="noopener noreferrer"><span class="bracket">[</span>arXiv<span class="bracket">]</span></a></p>
+                                </div>
+                            </li>
+                        </ol>
+
                         <h3 class="pub-group"><span data-lang="en">Award</span><span data-lang="ja">受賞</span></h3>
                         <ol class="pubs">
                             <li class="pub">
@@ -204,7 +202,6 @@
                     <button type="button" class="fold-btn" id="contact-btn" aria-expanded="true" aria-controls="contact-panel">
                         <span class="fold-num" aria-hidden="true">04</span>
                         <span class="fold-title"><span data-lang="en">Contact</span><span data-lang="ja">連絡先</span></span>
-                        <span class="fold-icon" aria-hidden="true"></span>
                     </button>
                 </h2>
                 <div class="fold-panel" id="contact-panel" role="region" aria-labelledby="contact-btn">
@@ -220,11 +217,6 @@
                                 <!-- LinkedIn アイコン -->
                                 <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
                                 <a class="link link-ext" href="https://www.linkedin.com/in/shogo-iwakata-5412672b1/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                            </li>
-                            <li>
-                                <!-- X アイコン -->
-                                <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
-                                <a class="link link-ext" href="https://x.com/s_iwakata" target="_blank" rel="noopener noreferrer">X</a>
                             </li>
                         </ul>
                     </div>

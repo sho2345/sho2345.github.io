@@ -68,12 +68,11 @@
 
 // セクションの折りたたみ（アコーディオン）
 // - JS 有効時のみ <html> に js クラスを付けて折りたたむ（無効時は全展開のまま）
-// - マウス環境: 見出しに少し留まると開き、マウスが離れても開いたまま（読んでいる途中で閉じない）
-// - クリック / タップ / Enter / Space で開閉。ホバーで開いた直後のクリックは「閉じる」にしない
+// - マウス環境: 見出しに少し留まると開き、セクションからマウスが離れると閉じる
+// - タップ / キーボード（Enter / Space）では開閉を切り替える
 // - ヘッダーのナビから移動したときは該当セクションを開いてからスクロールする
 (function () {
     var HOVER_DELAY = 140;        // ホバーで開くまでの待ち時間（素通りでは開かない）
-    var CLICK_GRACE = 700;        // ホバーで開いた直後、この時間内のクリックは無視する
     var SCROLL_GUARD = 200;       // スクロール直後はホバーで開かない
 
     document.documentElement.classList.add('js');
@@ -120,39 +119,47 @@
         });
     }
 
+    // マウスでホバー操作できる環境か
+    function isMouse(e) {
+        return e.pointerType === 'mouse' && canHover && canHover.matches;
+    }
+
     function setupFold(fold) {
         var btn = fold.querySelector('.fold-btn');
         var timer = null;
-        var hoverOpenedAt = 0;
 
         setOpen(fold, false);
 
         btn.addEventListener('click', function () {
-            if (isOpen(fold) && Date.now() - hoverOpenedAt < CLICK_GRACE) {
+            // マウスで乗っている間はホバーで開閉するため、クリックは「開く」だけにする
+            if (canHover && canHover.matches && fold.matches(':hover')) {
+                setOpen(fold, true);
                 return;
             }
-            hoverOpenedAt = 0;
             setOpen(fold, !isOpen(fold));
         });
 
         // 実際にマウスを動かしたときだけホバー判定を始める
         btn.addEventListener('pointermove', function (e) {
-            if (e.pointerType !== 'mouse' || !canHover || !canHover.matches) {
-                return;
-            }
-            if (isOpen(fold) || timer || Date.now() - lastScroll < SCROLL_GUARD) {
+            if (!isMouse(e) || isOpen(fold) || timer || Date.now() - lastScroll < SCROLL_GUARD) {
                 return;
             }
             timer = setTimeout(function () {
                 timer = null;
                 setOpen(fold, true);
-                hoverOpenedAt = Date.now();
             }, HOVER_DELAY);
         });
 
         btn.addEventListener('pointerleave', function () {
             clearTimeout(timer);
             timer = null;
+        });
+
+        // セクション（見出し + 詳細）からマウスが出たら閉じる
+        fold.addEventListener('pointerleave', function (e) {
+            if (isMouse(e)) {
+                setOpen(fold, false);
+            }
         });
     }
 
