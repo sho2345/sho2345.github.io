@@ -1,19 +1,24 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shogo Iwakata</title>
+    <meta name="color-scheme" content="light dark">
+    <!-- Web フォント（欧文: Inter / Instrument Serif、和文: Noto Sans JP） -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@500&display=swap">
     <link rel="stylesheet" href="style.css">
     <!-- 言語設定を描画前に反映するため head で読み込む -->
     <script src="script.js"></script>
 </head>
 <body>
 
-    <header>
-        <div class="logo"><span data-lang="en">Shogo Iwakata</span><span data-lang="ja">岩片 彰吾</span></div>
-        <div class="header-right">
-            <nav>
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="logo" href="#profile"><span data-lang="en">Shogo Iwakata</span><span data-lang="ja">岩片 彰吾</span></a>
+            <nav class="site-nav" aria-label="Sections">
                 <ul>
                     <li><a href="#profile"><span data-lang="en">Profile</span><span data-lang="ja">プロフィール</span></a></li>
                     <li><a href="#experience"><span data-lang="en">Experience</span><span data-lang="ja">職歴</span></a></li>
@@ -22,158 +27,211 @@
                     <li><a href="#contact"><span data-lang="en">Contact</span><span data-lang="ja">連絡先</span></a></li>
                 </ul>
             </nav>
-            <!-- 言語切り替えボタン -->
-            <div class="lang-switch">
+            <!-- 言語切り替えボタン（セグメント型） -->
+            <div class="lang-switch" role="group" aria-label="Language">
                 <button type="button" class="lang-btn" data-set-lang="en">EN</button>
-                <span class="lang-sep">|</span>
                 <button type="button" class="lang-btn" data-set-lang="ja">JP</button>
             </div>
         </div>
     </header>
 
-    <main>
-        <section id="profile" class="content-wrapper">
-            <div class="about-container">
-                <div class="about-image">
-                    <img src="images/profile_pic.jpg" alt="Profile photo of Shogo Iwakata" data-alt-en="Profile photo of Shogo Iwakata" data-alt-ja="岩片彰吾のプロフィール写真">
-                </div>
-                <div class="about-text">
-                    <h2><span data-lang="en">Shogo Iwakata</span><span data-lang="ja">岩片 彰吾</span></h2>
-                    <p data-lang="en">
-                        I am a second-year Master’s student at Waseda University, belonging to the <a href="https://morishima-lab.jp/members" target="_blank" rel="noopener noreferrer">Morishima Lab</a>. My research interests include machine learning, computer vision, and robotics. Currently, I am working on imitation learning for robots using a small amount of data.
-                    </p>
-                    <p data-lang="ja">
-                        早稲田大学 大学院 修士2年で、<a href="https://morishima-lab.jp/members" target="_blank" rel="noopener noreferrer">森島研究室</a>に所属しています。機械学習、コンピュータビジョン、ロボティクスに関心があり、現在は少量のデータを用いたロボットの模倣学習に取り組んでいます。
-                    </p>
-                </div>
+    <main class="page">
+        <!-- ========== ヒーロー（プロフィール） ========== -->
+        <section id="profile" class="hero">
+            <div class="hero-text">
+                <p class="hero-kicker">
+                    <span data-lang="en">Machine Learning · Computer Vision · Robotics</span><span data-lang="ja">機械学習 · コンピュータビジョン · ロボティクス</span>
+                </p>
+                <h1 class="hero-name"><span data-lang="en">Shogo Iwakata</span><span data-lang="ja">岩片 彰吾</span></h1>
+                <p class="hero-bio" data-lang="en">
+                    I am a second-year Master’s student at Waseda University, belonging to the <a href="https://morishima-lab.jp/members" target="_blank" rel="noopener noreferrer">Morishima Lab</a>. My research interests include machine learning, computer vision, and robotics. Currently, I am working on imitation learning for robots using a small amount of data.
+                </p>
+                <p class="hero-bio" data-lang="ja">
+                    早稲田大学 大学院 修士2年で、<a href="https://morishima-lab.jp/members" target="_blank" rel="noopener noreferrer">森島研究室</a>に所属しています。機械学習、コンピュータビジョン、ロボティクスに関心があり、現在は少量のデータを用いたロボットの模倣学習に取り組んでいます。
+                </p>
             </div>
+            <figure class="hero-photo">
+                <img src="images/profile_pic.jpg" alt="Profile photo of Shogo Iwakata" data-alt-en="Profile photo of Shogo Iwakata" data-alt-ja="岩片彰吾のプロフィール写真" width="4032" height="3024">
+            </figure>
         </section>
 
-        <section id="experience" class="content-wrapper">
-            <h2><span data-lang="en">Experience</span><span data-lang="ja">職歴</span></h2>
-            <div class="experience-item">
-                <p class="year"><span data-lang="en">Oct 2026 – Present</span><span data-lang="ja">2026年10月 – 現在</span></p>
-                <div class="description">
-                    <h3><span data-lang="en">Hitachi, Ltd.</span><span data-lang="ja">株式会社日立製作所</span></h3>
-                    <p><span data-lang="en">Research And Development Scientist — Tokyo, Japan</span><span data-lang="ja">研究開発職 / 研究員 — 東京</span></p>
-                </div>
-            </div>
-            <div class="experience-item">
-                <p class="year"><span data-lang="en">Sep 2023 – Mar 2026</span><span data-lang="ja">2023年9月 – 2026年3月</span></p>
-                <div class="description">
-                    <h3><span data-lang="en">National Institute of Advanced Industrial Science and Technology (AIST)</span><span data-lang="ja">国立研究開発法人 産業技術総合研究所 (AIST)</span></h3>
-                    <p><span data-lang="en">Internship</span><span data-lang="ja">インターン</span></p>
-                </div>
-            </div>
-        </section>
+        <!-- ========== 折りたたみセクション一覧 ==========
+             JS 無効時はすべて展開表示。JS 有効時（html.js）のみ折りたたむ。 -->
+        <div class="folds">
 
-        <section id="education" class="content-wrapper">
-            <h2><span data-lang="en">Education</span><span data-lang="ja">学歴</span></h2>
-            <div class="experience-item">
-                <p class="year">2024 - </p>
-                <div class="description">
-                    <h3><span data-lang="en">Waseda University</span><span data-lang="ja">早稲田大学</span></h3>
-                    <p><span data-lang="en">Master's Program, Graduate School of Advanced Science and Engineering, Morishima Lab</span><span data-lang="ja">大学院 先進理工学研究科 修士課程（森島研究室）</span></p>
+            <section id="experience" class="fold">
+                <h2 class="fold-head">
+                    <button type="button" class="fold-btn" id="experience-btn" aria-expanded="true" aria-controls="experience-panel">
+                        <span class="fold-num" aria-hidden="true">01</span>
+                        <span class="fold-title"><span data-lang="en">Experience</span><span data-lang="ja">職歴</span></span>
+                        <span class="fold-icon" aria-hidden="true"></span>
+                    </button>
+                </h2>
+                <div class="fold-panel" id="experience-panel" role="region" aria-labelledby="experience-btn">
+                    <div class="fold-inner">
+                        <ol class="timeline">
+                            <li class="entry">
+                                <p class="entry-date"><span data-lang="en">Oct 2026 – Present</span><span data-lang="ja">2026年10月 – 現在</span></p>
+                                <div class="entry-body">
+                                    <h3 class="entry-title"><span data-lang="en">Hitachi, Ltd.</span><span data-lang="ja">株式会社日立製作所</span></h3>
+                                    <p class="entry-sub"><span data-lang="en">Research And Development Scientist — Tokyo, Japan</span><span data-lang="ja">研究開発職 / 研究員 — 東京</span></p>
+                                </div>
+                            </li>
+                            <li class="entry">
+                                <p class="entry-date"><span data-lang="en">Sep 2023 – Mar 2026</span><span data-lang="ja">2023年9月 – 2026年3月</span></p>
+                                <div class="entry-body">
+                                    <h3 class="entry-title"><span data-lang="en">National Institute of Advanced Industrial Science and Technology (AIST)</span><span data-lang="ja">国立研究開発法人 産業技術総合研究所 (AIST)</span></h3>
+                                    <p class="entry-sub"><span data-lang="en">Internship</span><span data-lang="ja">インターン</span></p>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
                 </div>
-            </div>
-            <div class="experience-item">
-                <p class="year">2020 - 2024</p>
-                <div class="description">
-                    <h3><span data-lang="en">Waseda University</span><span data-lang="ja">早稲田大学</span></h3>
-                    <p><span data-lang="en">Bachelor's Program, Graduate School of Advanced Science and Engineering, Morishima Lab</span><span data-lang="ja">先進理工学部 学士課程（森島研究室）</span></p>
-                </div>
-            </div>
-            <div class="experience-item">
-                <p class="year">2017 - 2020</p>
-                <div class="description">
-                    <h3><span data-lang="en">Kaisei Highschool</span><span data-lang="ja">開成高等学校</span></h3>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="publication" class="content-wrapper">
-            <h2><span data-lang="en">Publications</span><span data-lang="ja">研究業績</span></h2>
-            <h3 class="pub-subtitle"><span data-lang="en">International</span><span data-lang="ja">国際会議</span></h3>
-            <div class="project-item">
-                <div class="project-text">
-                    <h3>Improving Imitation Learning Efficiency for Manipulation through Geometric Prior Pretraining, Shogo Iwakata, Tomohiro Motoda, Ryosuke Yamada, Koshi Makihara, Ryoichi Nakajo, Keitaro Tanaka, Masaki Murooka, Roman Mykhailyshyn, Hirokatsu Kataoka, Shigeo Morishima, Yukiyasu Domae, arXiv preprint arXiv:2609.12721, September 2026.</h3>
-                    <p><a href="https://arxiv.org/abs/2609.12721" target="_blank" rel="noopener noreferrer">[arXiv]</a></p>
+            <section id="education" class="fold">
+                <h2 class="fold-head">
+                    <button type="button" class="fold-btn" id="education-btn" aria-expanded="true" aria-controls="education-panel">
+                        <span class="fold-num" aria-hidden="true">02</span>
+                        <span class="fold-title"><span data-lang="en">Education</span><span data-lang="ja">学歴</span></span>
+                        <span class="fold-icon" aria-hidden="true"></span>
+                    </button>
+                </h2>
+                <div class="fold-panel" id="education-panel" role="region" aria-labelledby="education-btn">
+                    <div class="fold-inner">
+                        <ol class="timeline">
+                            <li class="entry">
+                                <p class="entry-date">2024 - </p>
+                                <div class="entry-body">
+                                    <h3 class="entry-title"><span data-lang="en">Waseda University</span><span data-lang="ja">早稲田大学</span></h3>
+                                    <p class="entry-sub"><span data-lang="en">Master's Program, Graduate School of Advanced Science and Engineering, Morishima Lab</span><span data-lang="ja">大学院 先進理工学研究科 修士課程（森島研究室）</span></p>
+                                </div>
+                            </li>
+                            <li class="entry">
+                                <p class="entry-date">2020 - 2024</p>
+                                <div class="entry-body">
+                                    <h3 class="entry-title"><span data-lang="en">Waseda University</span><span data-lang="ja">早稲田大学</span></h3>
+                                    <p class="entry-sub"><span data-lang="en">Bachelor's Program, Graduate School of Advanced Science and Engineering, Morishima Lab</span><span data-lang="ja">先進理工学部 学士課程（森島研究室）</span></p>
+                                </div>
+                            </li>
+                            <li class="entry">
+                                <p class="entry-date">2017 - 2020</p>
+                                <div class="entry-body">
+                                    <h3 class="entry-title"><span data-lang="en">Kaisei Highschool</span><span data-lang="ja">開成高等学校</span></h3>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
                 </div>
-            </div>
-            <div class="project-item">
-                <div class="project-text">
-                    <h3>Viewpoint-Dependent 3D Visual Grounding for Mobile Robots, Shogo Iwakata, Ryosuke Oshima, Hideki Tsunashima, Qi Feng, Hirokatsu Kataoka, Shigeo Morishima, IEEE International Conference on Image Processing (ICIP2025), September 2025.</h3>
-                    <p><a href="https://ieeexplore.ieee.org/abstract/document/11084504" target="_blank" rel="noopener noreferrer">[paper]</a></p>
-                </div>
-                <div class="project-image">
-                    <img src="images/3DVG_pic.png" alt="Overview figure of Viewpoint-Dependent 3D Visual Grounding" data-alt-en="Overview figure of Viewpoint-Dependent 3D Visual Grounding" data-alt-ja="Viewpoint-Dependent 3D Visual Grounding の概要図">
-                </div>
-            </div>
-            <!-- <div class="project-item">
-                 <div class="project-text">
-                    <h3>プロジェクト名 02</h3>
-                    <p>テキストの例です。ホームページを紹介したり、自己紹介テキストを入力しましょう。</p>
-                </div>
-                <div class="project-image">
-                    <img src="https://i.imgur.com/b9JSCp6.png" alt="プロジェクト2の画像">
-                </div>
-            </div> -->
-            <h3 class="pub-subtitle"><span data-lang="en">Domestic</span><span data-lang="ja">国内発表</span></h3>
-            <div class="project-item">
-                <div class="project-text">
-                    <h3>A New Benchmark for 3D Visual Grounding using Robotic Viewpoints, Shogo Iwakata, Ryosuke Oshima, Hideki Tsunashima, Fumiya Matsuzawa, Qiu Yue, Hirokatsu Kataoka, Shigeo Morishima, 画像の認識理解シンポジウム (MIRU2024)、August 2024.</h3>
-                </div>
-            </div>
-            <div class="project-item">
-                <div class="project-text">
-                    <h3>数式ドリブン事前学習に基づくロボットの方策学習の検証, 岩片彰吾, 元田智大, 山田亮佑, 牧原昂志, 中條亨一, 田中啓太郎, 片岡裕雄, 森島繁生、画像の認識理解シンポジウム (MIRU2025)、August 2025.</h3>
-                </div>
-            </div>
-            <!-- テンプレート: 国内発表の項目
-            <div class="project-item">
-                <div class="project-text">
-                    <h3>タイトル, 著者..., 会議/誌名, 月 年.</h3>
-                </div>
-            </div>
-            -->
+            </section>
 
-            <h3 class="pub-subtitle"><span data-lang="en">Award</span><span data-lang="ja">受賞</span></h3>
-            <div class="project-item">
-                <div class="project-text">
-                    <h3><span data-lang="en">Student Encouragement Award, 86th National Convention of IPSJ, March 2024</span><span data-lang="ja">情報処理学会第86回全国大会 学生奨励賞, 2024年3月</span></h3>
-                </div>
-            </div>
-            <!-- テンプレート: 受賞の項目
-            <div class="project-item">
-                <div class="project-text">
-                    <h3>賞名, 主催, 月 年</h3>
-                </div>
-            </div>
-            -->
-        </section>
+            <section id="publication" class="fold">
+                <h2 class="fold-head">
+                    <button type="button" class="fold-btn" id="publication-btn" aria-expanded="true" aria-controls="publication-panel">
+                        <span class="fold-num" aria-hidden="true">03</span>
+                        <span class="fold-title"><span data-lang="en">Publications</span><span data-lang="ja">研究業績</span></span>
+                        <span class="fold-icon" aria-hidden="true"></span>
+                    </button>
+                </h2>
+                <div class="fold-panel" id="publication-panel" role="region" aria-labelledby="publication-btn">
+                    <div class="fold-inner">
+                        <h3 class="pub-group"><span data-lang="en">International</span><span data-lang="ja">国際会議</span></h3>
+                        <ol class="pubs">
+                            <li class="pub">
+                                <div class="pub-text">
+                                    <p class="pub-cite"><span class="pub-title">Improving Imitation Learning Efficiency for Manipulation through Geometric Prior Pretraining<span class="sep">,</span></span> <span class="pub-authors"><span class="me">Shogo Iwakata</span>, Tomohiro Motoda, Ryosuke Yamada, Koshi Makihara, Ryoichi Nakajo, Keitaro Tanaka, Masaki Murooka, Roman Mykhailyshyn, Hirokatsu Kataoka, Shigeo Morishima, Yukiyasu Domae<span class="sep">,</span></span> <span class="pub-venue">arXiv preprint arXiv:2609.12721, September 2026.</span></p>
+                                    <p class="pub-links"><a class="tag" href="https://arxiv.org/abs/2609.12721" target="_blank" rel="noopener noreferrer"><span class="bracket">[</span>arXiv<span class="bracket">]</span></a></p>
+                                </div>
+                            </li>
+                            <li class="pub has-thumb">
+                                <div class="pub-text">
+                                    <p class="pub-cite"><span class="pub-title">Viewpoint-Dependent 3D Visual Grounding for Mobile Robots<span class="sep">,</span></span> <span class="pub-authors"><span class="me">Shogo Iwakata</span>, Ryosuke Oshima, Hideki Tsunashima, Qi Feng, Hirokatsu Kataoka, Shigeo Morishima<span class="sep">,</span></span> <span class="pub-venue">IEEE International Conference on Image Processing (ICIP2025), September 2025.</span></p>
+                                    <p class="pub-links"><a class="tag" href="https://ieeexplore.ieee.org/abstract/document/11084504" target="_blank" rel="noopener noreferrer"><span class="bracket">[</span>paper<span class="bracket">]</span></a></p>
+                                </div>
+                                <a class="pub-thumb" href="images/3DVG_pic.png" target="_blank" rel="noopener">
+                                    <img src="images/3DVG_pic.png" alt="Overview figure of Viewpoint-Dependent 3D Visual Grounding" data-alt-en="Overview figure of Viewpoint-Dependent 3D Visual Grounding" data-alt-ja="Viewpoint-Dependent 3D Visual Grounding の概要図" width="1003" height="435" loading="lazy">
+                                </a>
+                            </li>
+                            <!-- <li class="pub">
+                                <div class="pub-text">
+                                    <p class="pub-cite">プロジェクト名 02</p>
+                                </div>
+                            </li> -->
+                        </ol>
 
-        <section id="contact" class="content-wrapper">
-            <h2><span data-lang="en">Contact</span><span data-lang="ja">連絡先</span></h2>
-            <p>
-                <!-- メールアイコン -->
-                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
-                <span data-lang="en">Email:</span><span data-lang="ja">メール:</span>
-                <a href="mailto:shogoiwakata@gmail.com">shogoiwakata@gmail.com</a>
-            </p>
-            <br>
-            <p>
-                <a href="https://www.linkedin.com/in/shogo-iwakata-5412672b1/" class="btn btn-linkedin" target="_blank" rel="noopener noreferrer">
-                    <!-- LinkedIn アイコン -->
-                    <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                    LinkedIn
-                </a>
-                <a href="https://x.com/s_iwakata" class="btn btn-x" target="_blank" rel="noopener noreferrer">
-                    <!-- X アイコン -->
-                    <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
-                    X
-                </a>
-            </p>
-        </section>
+                        <h3 class="pub-group"><span data-lang="en">Domestic</span><span data-lang="ja">国内発表</span></h3>
+                        <ol class="pubs">
+                            <li class="pub">
+                                <div class="pub-text">
+                                    <p class="pub-cite"><span class="pub-title">A New Benchmark for 3D Visual Grounding using Robotic Viewpoints<span class="sep">,</span></span> <span class="pub-authors"><span class="me">Shogo Iwakata</span>, Ryosuke Oshima, Hideki Tsunashima, Fumiya Matsuzawa, Qiu Yue, Hirokatsu Kataoka, Shigeo Morishima<span class="sep">,</span></span> <span class="pub-venue">画像の認識理解シンポジウム (MIRU2024)、August 2024.</span></p>
+                                </div>
+                            </li>
+                            <li class="pub">
+                                <div class="pub-text">
+                                    <p class="pub-cite"><span class="pub-title">数式ドリブン事前学習に基づくロボットの方策学習の検証<span class="sep">,</span></span> <span class="pub-authors"><span class="me">岩片彰吾</span>, 元田智大, 山田亮佑, 牧原昂志, 中條亨一, 田中啓太郎, 片岡裕雄, 森島繁生<span class="sep">、</span></span><span class="pub-venue">画像の認識理解シンポジウム (MIRU2025)、August 2025.</span></p>
+                                </div>
+                            </li>
+                            <!-- テンプレート: 国内発表の項目
+                            <li class="pub">
+                                <div class="pub-text">
+                                    <p class="pub-cite"><span class="pub-title">タイトル<span class="sep">,</span></span> <span class="pub-authors"><span class="me">著者</span>, ...<span class="sep">,</span></span> <span class="pub-venue">会議/誌名, 月 年.</span></p>
+                                </div>
+                            </li>
+                            -->
+                        </ol>
+
+                        <h3 class="pub-group"><span data-lang="en">Award</span><span data-lang="ja">受賞</span></h3>
+                        <ol class="pubs">
+                            <li class="pub">
+                                <div class="pub-text">
+                                    <p class="pub-cite"><span class="pub-title"><span data-lang="en">Student Encouragement Award, 86th National Convention of IPSJ, March 2024</span><span data-lang="ja">情報処理学会第86回全国大会 学生奨励賞, 2024年3月</span></span></p>
+                                </div>
+                            </li>
+                            <!-- テンプレート: 受賞の項目
+                            <li class="pub">
+                                <div class="pub-text">
+                                    <p class="pub-cite"><span class="pub-title">賞名, 主催, 月 年</span></p>
+                                </div>
+                            </li>
+                            -->
+                        </ol>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact" class="fold">
+                <h2 class="fold-head">
+                    <button type="button" class="fold-btn" id="contact-btn" aria-expanded="true" aria-controls="contact-panel">
+                        <span class="fold-num" aria-hidden="true">04</span>
+                        <span class="fold-title"><span data-lang="en">Contact</span><span data-lang="ja">連絡先</span></span>
+                        <span class="fold-icon" aria-hidden="true"></span>
+                    </button>
+                </h2>
+                <div class="fold-panel" id="contact-panel" role="region" aria-labelledby="contact-btn">
+                    <div class="fold-inner">
+                        <ul class="contact-list">
+                            <li>
+                                <!-- メールアイコン -->
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+                                <span class="contact-label"><span data-lang="en">Email:</span><span data-lang="ja">メール:</span></span>
+                                <a class="link" href="mailto:shogoiwakata@gmail.com">shogoiwakata@gmail.com</a>
+                            </li>
+                            <li>
+                                <!-- LinkedIn アイコン -->
+                                <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                                <a class="link link-ext" href="https://www.linkedin.com/in/shogo-iwakata-5412672b1/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                            </li>
+                            <li>
+                                <!-- X アイコン -->
+                                <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
+                                <a class="link link-ext" href="https://x.com/s_iwakata" target="_blank" rel="noopener noreferrer">X</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+        </div>
     </main>
 
 </body>

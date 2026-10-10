@@ -65,3 +65,137 @@
         }
     });
 })();
+
+// セクションの折りたたみ（アコーディオン）
+// - JS 有効時のみ <html> に js クラスを付けて折りたたむ（無効時は全展開のまま）
+// - マウス環境: 見出しに少し留まると開き、マウスが離れても開いたまま（読んでいる途中で閉じない）
+// - クリック / タップ / Enter / Space で開閉。ホバーで開いた直後のクリックは「閉じる」にしない
+// - ヘッダーのナビから移動したときは該当セクションを開いてからスクロールする
+(function () {
+    var HOVER_DELAY = 140;        // ホバーで開くまでの待ち時間（素通りでは開かない）
+    var CLICK_GRACE = 700;        // ホバーで開いた直後、この時間内のクリックは無視する
+    var SCROLL_GUARD = 200;       // スクロール直後はホバーで開かない
+
+    document.documentElement.classList.add('js');
+
+    var canHover = window.matchMedia ? window.matchMedia('(hover: hover) and (pointer: fine)') : null;
+    var reduceMotion = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+    var lastScroll = 0;
+
+    function setOpen(fold, open) {
+        fold.classList.toggle('is-open', open);
+        var btn = fold.querySelector('.fold-btn');
+        if (btn) {
+            btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        }
+    }
+
+    function isOpen(fold) {
+        return fold.classList.contains('is-open');
+    }
+
+    // id からセクションを取得（折りたたみ対象でなければ null）
+    function getFold(id) {
+        if (!id) {
+            return null;
+        }
+        var el = document.getElementById(id);
+        return el && el.classList.contains('fold') ? el : null;
+    }
+
+    // アニメーションなしで開く（直後にスクロール位置を計算するため）
+    function openInstantly(fold) {
+        fold.classList.add('is-instant');
+        setOpen(fold, true);
+        void fold.offsetHeight; // レイアウトを確定させる
+        requestAnimationFrame(function () {
+            fold.classList.remove('is-instant');
+        });
+    }
+
+    function scrollToEl(el) {
+        el.scrollIntoView({
+            behavior: reduceMotion && reduceMotion.matches ? 'auto' : 'smooth',
+            block: 'start'
+        });
+    }
+
+    function setupFold(fold) {
+        var btn = fold.querySelector('.fold-btn');
+        var timer = null;
+        var hoverOpenedAt = 0;
+
+        setOpen(fold, false);
+
+        btn.addEventListener('click', function () {
+            if (isOpen(fold) && Date.now() - hoverOpenedAt < CLICK_GRACE) {
+                return;
+            }
+            hoverOpenedAt = 0;
+            setOpen(fold, !isOpen(fold));
+        });
+
+        // 実際にマウスを動かしたときだけホバー判定を始める
+        btn.addEventListener('pointermove', function (e) {
+            if (e.pointerType !== 'mouse' || !canHover || !canHover.matches) {
+                return;
+            }
+            if (isOpen(fold) || timer || Date.now() - lastScroll < SCROLL_GUARD) {
+                return;
+            }
+            timer = setTimeout(function () {
+                timer = null;
+                setOpen(fold, true);
+                hoverOpenedAt = Date.now();
+            }, HOVER_DELAY);
+        });
+
+        btn.addEventListener('pointerleave', function () {
+            clearTimeout(timer);
+            timer = null;
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var folds = document.querySelectorAll('.fold');
+        for (var i = 0; i < folds.length; i++) {
+            setupFold(folds[i]);
+        }
+
+        window.addEventListener('scroll', function () {
+            lastScroll = Date.now();
+        }, { passive: true });
+
+        // ページ内リンク: 対象セクションを開いてからスクロール
+        var links = document.querySelectorAll('a[href^="#"]');
+        for (var j = 0; j < links.length; j++) {
+            links[j].addEventListener('click', function (e) {
+                var fold = getFold(this.getAttribute('href').slice(1));
+                if (!fold) {
+                    return;
+                }
+                e.preventDefault();
+                openInstantly(fold);
+                if (location.hash !== '#' + fold.id) {
+                    history.pushState(null, '', '#' + fold.id);
+                }
+                scrollToEl(fold);
+            });
+        }
+
+        // 戻る / 進むでハッシュが変わったときも開く
+        window.addEventListener('hashchange', function () {
+            var fold = getFold(location.hash.slice(1));
+            if (fold) {
+                openInstantly(fold);
+            }
+        });
+
+        // URL にハッシュ付きで開かれた場合はそのセクションを開いておく
+        var initial = getFold(location.hash.slice(1));
+        if (initial) {
+            openInstantly(initial);
+            initial.scrollIntoView({ block: 'start' });
+        }
+    });
+})();

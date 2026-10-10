@@ -1,242 +1,860 @@
-﻿/* ========== 基本設定 ========== */
-html {
-    scroll-behavior: smooth; /* ページ内リンクをスムーズにスクロール */
+/* ==========================================================
+   デザイントークン
+   ========================================================== */
+:root {
+    --bg: #f7f6f2;
+    --ink: #1a1917;          /* 本文の主色 */
+    --ink-2: #4a4843;        /* 補足テキスト */
+    --muted: #6f6c66;        /* 日付・ラベル */
+    --line: #e2dfd8;         /* 区切り線 */
+    --line-strong: #c9c5bc;
+    --accent: #b4462a;       /* 唯一のアクセント色（朱） */
+    --header-bg: rgba(247, 246, 242, 0.82);
+    --thumb-bg: #ffffff;
+
+    --font-sans: "Inter", "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Meiryo", system-ui, sans-serif;
+    --font-display: "Instrument Serif", "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+
+    --container: 920px;
+    --gutter: 32px;
+    --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+    --dur: 0.42s;
+    --header-h: 64px;
+
+    color-scheme: light;
 }
 
-body {
-    font-family: 'Helvetica Neue', 'Arial', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Meiryo', sans-serif;
-    margin: 0;
-    background-color: #f8f9fa; /* 背景を少しグレーに */
-    color: #333; /* 基本文字色 */
-    line-height: 1.7;
+/* ダークモード（OS 設定に追従） */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #131312;
+        --ink: #ecebe7;
+        --ink-2: #bab7af;
+        --muted: #8f8c85;
+        --line: #2b2a27;
+        --line-strong: #45433f;
+        --accent: #e8896a;
+        --header-bg: rgba(19, 19, 18, 0.8);
+        --thumb-bg: #f4f3ef;
+        color-scheme: dark;
+    }
 }
 
-/* ========== ヘッダー ========== */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 40px;
-    background-color: #fff;
-    border-bottom: 1px solid #eee;
-}
-
-header .logo {
-    font-weight: bold;
-    font-size: 20px;
-}
-
-header nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-}
-
-header nav li {
-    margin-left: 30px;
-}
-
-header nav a {
-    text-decoration: none;
-    color: #555;
-    font-weight: bold;
-}
-
-/* ナビと言語切り替えを右側にまとめる */
-.header-right {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-}
-
-/* ========== 言語切り替え ========== */
-/* 現在の言語と異なる要素を非表示にする */
+/* ==========================================================
+   言語切り替え: 現在の言語と異なる要素を非表示にする
+   ========================================================== */
 html[lang="en"] [data-lang="ja"],
 html[lang="ja"] [data-lang="en"] {
     display: none !important;
 }
 
-.lang-switch {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    color: #ccc;
+/* ==========================================================
+   ベース
+   ========================================================== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
 }
 
-.lang-btn {
-    background: none;
-    border: none;
-    padding: 0;
-    font: inherit;
-    font-weight: bold;
-    color: #aaa;
-    cursor: pointer;
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
 }
 
-.lang-btn:hover,
-.lang-btn.active {
-    color: #333;
-}
-
-/* ========== 全体レイアウト ========== */
-.content-wrapper {
-    max-width: 1000px;
-    margin: 80px auto; /* 上下余白80px、左右は自動で中央寄せ */
-    padding: 0 40px;
-}
-
-h2 {
-    font-size: 32px;
-    text-align: left;
-    margin-bottom: 40px;
-}
-
-/* ========== 自己紹介セクション ========== */
-.about-container {
-    display: flex;
-    align-items: center;
-    gap: 50px; /* 画像とテキストの間隔 */
-}
-
-.about-image img {
-    width: 280px;
-    height: 280px;
-    border-radius: 50%; /* 画像を丸くする */
-    object-fit: cover; /* 画像の比率を保ったままトリミング */
-}
-
-.about-text h2 {
-    font-size: 48px;
-    margin-top: 0;
-}
-
-.buttons {
-    margin-top: 30px;
-    display: flex;
-    gap: 15px;
-}
-
-.btn {
-    display: inline-block;
-    padding: 15px 30px;
-    border-radius: 50px; /* ボタンを角丸にする */
-    text-decoration: none;
-    color: #fff;
-    font-weight: bold;
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
     font-size: 16px;
-    text-align: center;
-    min-width: 120px;
+    line-height: 1.65;
+    font-feature-settings: "kern", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
 
-.btn-yellow { background-color: #ffc107; }
-.btn-red { background-color: #dc3545; }
-.btn-blue { background-color: #00bcd4; }
+/* 和文は行間と字間を少し広げる */
+html[lang="ja"] body {
+    line-height: 1.85;
+    letter-spacing: 0.02em;
+}
 
+::selection {
+    background: color-mix(in srgb, var(--accent) 22%, transparent);
+    color: var(--ink);
+}
 
-/* ========== 経歴セクション（職歴・学歴） ========== */
-.experience-item {
-    display: flex;
-    gap: 30px;
-    border-bottom: 1px solid #eee;
-    padding: 20px 0;
-}
-.experience-item:last-child {
-    border-bottom: none;
-}
-.experience-item .year {
-    color: #888;
-    min-width: 120px;
-}
-.experience-item h3 {
-    margin: 0 0 5px 0;
-}
-.experience-item p {
+h1, h2, h3, p, ol, ul, figure {
     margin: 0;
 }
 
-/* ========== プロジェクトセクション ========== */
-.project-item {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-    margin-bottom: 60px;
+ol, ul {
+    padding: 0;
+    list-style: none;
 }
 
-/* 2つ目以降のプロジェクトでテキストと画像を交互にする */
-.project-item:nth-child(odd) {
-    flex-direction: row-reverse;
-}
-
-.project-text {
-    flex: 1; /* 幅を均等にする */
-}
-
-.project-image {
-    flex: 1;
-}
-
-.project-item h3 {
-    font-size: 24px;
-}
-
-.project-item img {
-    width: 100%;
+img {
     display: block;
+    max-width: 100%;
+    height: auto;
 }
 
-/* ========== スマホ対応 ========== */
-@media (max-width: 768px) {
-    header {
-        flex-direction: column;
-        gap: 15px;
-    }
-    .header-right {
-        flex-direction: column;
-        gap: 10px;
-    }
-    header nav li:first-child {
-        margin-left: 0;
-    }
-    .content-wrapper {
-        margin: 40px auto;
-        padding: 0 20px;
-    }
-    .about-container, .project-item, .project-item:nth-child(odd) {
-        flex-direction: column;
-    }
-    .about-text h2 {
-        font-size: 36px;
-        text-align: center;
-    }
-    .buttons {
-        justify-content: center;
-    }
+button {
+    font: inherit;
+    color: inherit;
 }
-#publication h2 { font-size: 26px; }
-#publication .pub-subtitle { font-size: 20px; margin: 20px 0 10px; color: #555; }
 
+/* キーボード操作時のフォーカスリング */
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
 
-.btn-linkedin { background-color: #0a66c2; }
-.btn-x { background-color: #000000; }
-#contact .btn { margin-right: 10px; }
-
-/* アイコン（インラインSVG）を文字サイズに合わせる */
 .icon {
     width: 1em;
     height: 1em;
-    vertical-align: -0.125em;
+    flex: none;
 }
-#contact .btn .icon { margin-right: 6px; }
 
-/* Publications内のタイトルを半分のサイズに */
-#publication .project-text h3 { font-size: 16px; line-height: 1.4; font-weight: normal; }
+/* ==========================================================
+   リンク: 既定の青を使わず、細い下線が左から伸びる
+   ========================================================== */
+.hero-bio a,
+.link {
+    color: inherit;
+    text-decoration: none;
+    background-image:
+        linear-gradient(var(--accent), var(--accent)),
+        linear-gradient(var(--line-strong), var(--line-strong));
+    background-size: 0% 1px, 100% 1px;
+    background-position: 0 100%, 0 100%;
+    background-repeat: no-repeat;
+    padding-bottom: 1px;
+    transition: background-size 0.35s var(--ease), color 0.2s ease;
+}
 
+.hero-bio a:hover,
+.link:hover {
+    color: var(--accent);
+    background-size: 100% 1px, 100% 1px;
+}
 
-#publication .project-item img { max-width: 360px; height: auto; }
+/* 外部リンクの小さな矢印 */
+.link-ext::after {
+    content: "\2197";
+    display: inline-block;
+    margin-left: 0.2em;
+    font-size: 0.8em;
+    color: var(--muted);
+    transition: transform 0.25s var(--ease), color 0.2s ease;
+}
 
-/* Publications のレイアウト調整: 画像とテキストの間隔を詰める */
-#publication .project-item { gap: 12px; margin-bottom: 30px; }
-#publication .project-image { flex: 0 0 auto; }
-#publication .project-text { flex: 1; }
+.link-ext:hover::after {
+    color: var(--accent);
+    transform: translate(1px, -1px);
+}
 
+/* ==========================================================
+   ヘッダー
+   ========================================================== */
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--header-bg);
+    -webkit-backdrop-filter: saturate(1.4) blur(12px);
+    backdrop-filter: saturate(1.4) blur(12px);
+}
+
+.header-inner {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+    height: var(--header-h);
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.logo {
+    margin-right: auto;
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+}
+
+.site-nav ul {
+    display: flex;
+    gap: 24px;
+}
+
+.site-nav a {
+    position: relative;
+    display: inline-block;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 13.5px;
+    white-space: nowrap;
+    padding: 4px 0;
+    transition: color 0.2s ease;
+}
+
+/* ナビの下線（ホバー時に左から伸びる） */
+.site-nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s var(--ease);
+}
+
+.site-nav a:hover {
+    color: var(--ink);
+}
+
+.site-nav a:hover::after {
+    transform: scaleX(1);
+}
+
+/* 言語切り替え（セグメントコントロール） */
+.lang-switch {
+    display: inline-flex;
+    padding: 2px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    flex: none;
+}
+
+.lang-btn {
+    border: 0;
+    background: transparent;
+    padding: 3px 9px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    line-height: 1.4;
+    color: var(--muted);
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.lang-btn:hover {
+    color: var(--ink);
+}
+
+.lang-btn.active {
+    background: var(--ink);
+    color: var(--bg);
+}
+
+/* ==========================================================
+   レイアウト
+   ========================================================== */
+.page {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 var(--gutter) 160px;
+}
+
+/* ==========================================================
+   ヒーロー
+   ========================================================== */
+.hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 200px;
+    align-items: end;
+    gap: 64px;
+    padding: 112px 0 96px;
+    scroll-margin-top: var(--header-h);
+}
+
+.hero-kicker {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+/* キッカー前の短いアクセント線 */
+.hero-kicker::before {
+    content: "";
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+    flex: none;
+}
+
+html[lang="ja"] .hero-kicker {
+    letter-spacing: 0.08em;
+}
+
+.hero-name {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(52px, 8vw, 84px);
+    line-height: 1;
+    letter-spacing: -0.015em;
+    margin-bottom: 32px;
+}
+
+html[lang="ja"] .hero-name {
+    font-weight: 500;
+    font-size: clamp(44px, 6.6vw, 68px);
+    letter-spacing: 0.04em;
+    line-height: 1.15;
+}
+
+.hero-bio {
+    max-width: 34em;
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--ink-2);
+}
+
+html[lang="ja"] .hero-bio {
+    font-size: 16px;
+    line-height: 1.95;
+}
+
+.hero-photo {
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border-radius: 3px;
+    background: var(--line);
+}
+
+.hero-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 65% 55%;
+    /* 人物が小さい写真なので少し寄りでトリミングする */
+    transform: scale(1.35);
+    transform-origin: 64% 60%;
+}
+
+/* ==========================================================
+   折りたたみセクション
+   ========================================================== */
+.folds {
+    border-bottom: 1px solid var(--line);
+}
+
+.fold {
+    border-top: 1px solid var(--line);
+    scroll-margin-top: var(--header-h);
+}
+
+.fold-head {
+    position: relative;
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+/* ホバー時に上の区切り線が濃く伸びる */
+.fold-head::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -1px;
+    height: 1px;
+    background: var(--ink);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s var(--ease);
+    pointer-events: none;
+}
+
+.fold-btn {
+    display: grid;
+    grid-template-columns: 56px minmax(0, 1fr) 20px;
+    align-items: baseline;
+    width: 100%;
+    padding: 26px 0 24px;
+    border: 0;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+}
+
+.fold-num {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    font-variant-numeric: tabular-nums;
+    color: var(--muted);
+    transition: color 0.25s ease;
+}
+
+.fold-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 34px;
+    line-height: 1.15;
+    letter-spacing: -0.005em;
+    transition: transform 0.35s var(--ease);
+}
+
+html[lang="ja"] .fold-title {
+    font-size: 26px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+}
+
+/* プラス / マイナスアイコン（2 本の線で描画） */
+.fold-icon {
+    position: relative;
+    width: 14px;
+    height: 14px;
+    align-self: center;
+    justify-self: end;
+    color: var(--muted);
+    transition: color 0.25s ease;
+}
+
+.fold-icon::before,
+.fold-icon::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    transition: transform var(--dur) var(--ease);
+}
+
+.fold-icon::after {
+    transform: rotate(90deg);
+}
+
+.fold.is-open .fold-icon::after {
+    transform: rotate(0deg);
+}
+
+/* ホバー（マウス環境）・フォーカス時の見た目 */
+@media (hover: hover) {
+    .fold-btn:hover .fold-num,
+    .fold-btn:hover .fold-icon {
+        color: var(--accent);
+    }
+    .fold-btn:hover .fold-title {
+        transform: translateX(4px);
+    }
+    .fold-head:hover::before {
+        transform: scaleX(1);
+    }
+}
+
+.fold.is-open .fold-num {
+    color: var(--accent);
+}
+
+.fold-btn:focus-visible {
+    outline-offset: -2px;
+}
+
+/* 開閉パネル: grid-template-rows 0fr ⇔ 1fr で高さを滑らかに変化させる */
+.fold-panel {
+    display: grid;
+    grid-template-rows: 1fr;
+}
+
+.fold-inner {
+    min-height: 0;
+    overflow: hidden;
+    padding-left: 56px;
+}
+
+/* パネル下部の余白（padding だと 0fr で潰れないため疑似要素で確保） */
+.fold-inner::after {
+    content: "";
+    display: block;
+    height: 40px;
+}
+
+/* JS 有効時のみ折りたたむ（JS 無効時は常に全展開） */
+.js .fold-panel {
+    transition: grid-template-rows var(--dur) var(--ease), visibility 0s linear 0s;
+}
+
+.js .fold-inner {
+    transition: opacity 0.3s ease 0.08s, transform var(--dur) var(--ease);
+}
+
+.js .fold:not(.is-open) .fold-panel {
+    grid-template-rows: 0fr;
+    visibility: hidden; /* 閉じている間は中のリンクにフォーカスさせない */
+    transition: grid-template-rows var(--dur) var(--ease), visibility 0s linear var(--dur);
+}
+
+.js .fold:not(.is-open) .fold-inner {
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity 0.2s ease, transform var(--dur) var(--ease);
+}
+
+/* ナビから移動するときはアニメーションなしで即座に開く（スクロール位置を正確にするため） */
+.js .fold.is-instant .fold-panel,
+.js .fold.is-instant .fold-inner {
+    transition: none !important;
+}
+
+html:not(.js) .fold-icon {
+    display: none;
+}
+
+html:not(.js) .fold-btn {
+    cursor: default;
+}
+
+/* ==========================================================
+   経歴（職歴・学歴）
+   ========================================================== */
+.entry {
+    display: grid;
+    grid-template-columns: 156px minmax(0, 1fr);
+    gap: 24px;
+    padding: 14px 0;
+}
+
+.entry + .entry {
+    border-top: 1px solid var(--line);
+}
+
+.entry-date {
+    padding-top: 2px;
+    font-size: 13px;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+}
+
+.entry-title {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.entry-sub {
+    margin-top: 2px;
+    font-size: 14.5px;
+    color: var(--ink-2);
+}
+
+/* ==========================================================
+   研究業績
+   ========================================================== */
+.pub-group {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 16px 0 4px;
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.pub-group:first-child {
+    margin-top: 4px;
+}
+
+/* グループ名の後ろに細い線を引く */
+.pub-group::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+}
+
+html[lang="ja"] .pub-group {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+}
+
+.pubs {
+    margin-bottom: 28px;
+}
+
+.pubs:last-child {
+    margin-bottom: 0;
+}
+
+.pub {
+    padding: 14px 0;
+}
+
+.pub.has-thumb {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 168px;
+    gap: 32px;
+    align-items: start;
+}
+
+.pub-cite {
+    max-width: 44em; /* 長い著者行が横に伸びすぎないようにする */
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink-2);
+}
+
+/* 引用文字列を「タイトル / 著者 / 掲載先」の 3 行に見せる */
+.pub-cite > span {
+    display: block;
+}
+
+.pub-cite .sep {
+    display: none;
+}
+
+.pub-title {
+    margin-bottom: 4px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--ink);
+    text-wrap: pretty;
+}
+
+.pub-authors .me {
+    color: var(--ink);
+    font-weight: 500;
+}
+
+.pub-venue {
+    color: var(--muted);
+}
+
+.pub-links {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+/* 論文リンクのラベル */
+.tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 10px 3px;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    line-height: 1.5;
+    color: var(--ink-2);
+    text-decoration: none;
+    transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.tag::after {
+    content: "\2197";
+    font-size: 0.9em;
+    transition: transform 0.25s var(--ease);
+}
+
+.tag:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 6%, transparent);
+}
+
+.tag:hover::after {
+    transform: translate(1px, -1px);
+}
+
+.tag .bracket {
+    display: none;
+}
+
+/* 概要図のサムネイル */
+.pub-thumb {
+    display: block;
+    margin-top: 4px;
+    padding: 6px;
+    background: var(--thumb-bg);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    transition: border-color 0.25s ease, transform 0.35s var(--ease);
+}
+
+.pub-thumb:hover {
+    border-color: var(--line-strong);
+    transform: translateY(-2px);
+}
+
+/* ==========================================================
+   連絡先
+   ========================================================== */
+.contact-list {
+    display: grid;
+    gap: 10px;
+    padding-top: 6px;
+}
+
+.contact-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 15px;
+}
+
+.contact-list .icon {
+    width: 15px;
+    height: 15px;
+    color: var(--muted);
+}
+
+.contact-label {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+/* ==========================================================
+   スマホ対応
+   ========================================================== */
+@media (max-width: 760px) {
+    :root {
+        --gutter: 20px;
+        --header-h: 84px;
+    }
+
+    .header-inner {
+        height: auto;
+        flex-wrap: wrap;
+        row-gap: 4px;
+        padding-top: 12px;
+        padding-bottom: 8px;
+    }
+
+    /* ナビは 2 行目に置き、はみ出す場合は横スクロール */
+    .site-nav {
+        order: 3;
+        width: calc(100% + 2 * var(--gutter));
+        margin: 0 calc(-1 * var(--gutter));
+        padding: 0 var(--gutter);
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+
+    .site-nav::-webkit-scrollbar {
+        display: none;
+    }
+
+    .site-nav ul {
+        justify-content: space-between;
+        gap: 14px;
+    }
+
+    .site-nav a {
+        font-size: 12.5px;
+        padding: 6px 0;
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 48px 0 56px;
+    }
+
+    .hero-photo {
+        order: -1;
+        width: 116px;
+    }
+
+    .hero-kicker {
+        gap: 10px;
+        font-size: 10.5px;
+        letter-spacing: 0.07em;
+    }
+
+    .hero-kicker::before {
+        width: 16px;
+    }
+
+    .hero-name {
+        margin-bottom: 24px;
+    }
+
+    .hero-bio {
+        font-size: 16px;
+    }
+
+    .fold-btn {
+        grid-template-columns: 36px minmax(0, 1fr) 16px;
+        padding: 22px 0 20px;
+    }
+
+    .fold-title {
+        font-size: 28px;
+    }
+
+    html[lang="ja"] .fold-title {
+        font-size: 22px;
+    }
+
+    .fold-inner {
+        padding-left: 0;
+    }
+
+    .fold-inner::after {
+        height: 28px;
+    }
+
+    .entry {
+        grid-template-columns: 1fr;
+        gap: 2px;
+    }
+
+    .pub.has-thumb {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .pub-thumb {
+        max-width: 280px;
+        margin-top: 0;
+    }
+
+    .contact-list li {
+        flex-wrap: wrap;
+        row-gap: 0;
+    }
+}
+
+/* ==========================================================
+   動きを減らす設定を尊重
+   ========================================================== */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+        transition-delay: 0s !important;
+    }
+}
