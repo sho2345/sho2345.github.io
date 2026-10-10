@@ -707,21 +707,41 @@ html[lang="ja"] .pub-group {
         padding: 6px 0;
     }
 
+    /* スマホでは「写真 | 名前」を横に並べ、自己紹介文はその下に全幅で置く */
     .hero {
-        grid-template-columns: 1fr;
-        gap: 32px;
-        padding: 40px 0 56px;
+        grid-template-columns: 92px minmax(0, 1fr);
+        grid-template-areas:
+            "photo name"
+            "bio   bio";
+        align-items: center;
+        column-gap: 20px;
+        row-gap: 28px;
+        padding: 36px 0 52px;
     }
 
-    /* スマホでは文章の上に縦長で置く */
+    /* 名前と自己紹介文をグリッドの直接の子として配置する */
+    .hero-text {
+        display: contents;
+    }
+
     .hero-photo {
-        order: -1;
-        width: 116px;
+        grid-area: photo;
         aspect-ratio: 4 / 5;
     }
 
     .hero-name {
-        margin-bottom: 24px;
+        grid-area: name;
+        margin-bottom: 0;
+        font-size: clamp(30px, 9.4vw, 40px);
+        line-height: 1.08;
+    }
+
+    html[lang="ja"] .hero-name {
+        font-size: clamp(28px, 8.4vw, 36px);
+    }
+
+    .hero-bio {
+        grid-area: bio;
     }
 
     .hero-bio {
